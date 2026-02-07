@@ -3,32 +3,209 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yarn Marketplace MVP</title>
+  <title>Yarn Marketplace — Demo</title>
   <style>
-    :root { color-scheme: light; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#faf7f4; color:#1f1f1f; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
-    .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-    h1 { margin: 0 0 8px; font-size: 36px; }
-    .tag { display:inline-block; background:#f1e5ff; color:#5b2c83; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.4px; text-transform: uppercase; }
-    ul { line-height: 1.7; }
-    .muted { color:#5a5a5a; }
+    :root {
+      --bg: #faf7f4;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #666;
+      --accent: #6b3fa0;
+      --accent-2: #f1e5ff;
+      --border: #ece3da;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg); color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 0 24px; position: sticky; top: 0; background: var(--bg); z-index: 2;
+    }
+    .logo { font-weight: 700; font-size: 20px; letter-spacing: .3px; }
+    .nav { display: flex; gap: 16px; color: var(--muted); font-size: 14px; }
+    .btn {
+      background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 10px;
+      border: 0; font-weight: 600; cursor: pointer; font-size: 14px;
+    }
+    .hero {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: center;
+      padding: 24px; background: var(--card); border-radius: 18px; border: 1px solid var(--border);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 36px; }
+    .hero p { margin: 0 0 16px; color: var(--muted); }
+    .search {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 8px;
+    }
+    .search input {
+      padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px;
+    }
+    .pill { display: inline-block; background: var(--accent-2); color: #4b2b75; padding: 6px 10px; border-radius: 999px; font-size: 12px; margin-right: 6px; }
+    .section { margin: 32px 0; }
+    .section h2 { margin: 0 0 12px; font-size: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .card img { width: 100%; height: 160px; object-fit: cover; }
+    .card .body { padding: 12px; display: grid; gap: 6px; }
+    .price { font-weight: 700; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: #f6f1ea; color: #6a4d3b; width: fit-content; }
+    .seller { display: flex; align-items: center; gap: 8px; }
+    .avatar { width: 24px; height: 24px; border-radius: 50%; background: #ddd; display: inline-block; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .table th, .table td { text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--border); }
+    footer { color: var(--muted); font-size: 12px; padding: 24px 0; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
-      <span class="tag">MVP placeholder</span>
-      <h1>Yarn Marketplace</h1>
-      <p class="muted">A simple demo page for the upcoming marketplace connecting yarn buyers and sellers.</p>
-      <h3>Focus areas</h3>
-      <ul>
-        <li>Fast listing + bundle creation</li>
-        <li>Deal discovery and saved searches</li>
-        <li>Shipping estimation and simple seller workflow</li>
-      </ul>
-      <p class="muted">More soon.</p>
-    </div>
+    <header>
+      <div class="logo">Yarn Market</div>
+      <nav class="nav">
+        <a href="#deals">Deals</a>
+        <a href="#bundles">Bundles</a>
+        <a href="#sell">Sell</a>
+        <a href="#shipping">Shipping</a>
+      </nav>
+      <button class="btn">List Your Yarn</button>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="pill">Demo</span>
+        <span class="pill">No fees beta</span>
+        <h1>Find great yarn deals — without the marketplace headache.</h1>
+        <p>Buy bundles, discover rare colorways, and message sellers directly. Sellers list once and ship smarter.</p>
+        <div class="search">
+          <input placeholder="Search brands, weights, colors… (e.g., Malabrigo, DK, speckled)" />
+          <button class="btn">Search</button>
+        </div>
+        <div style="margin-top:10px;" class="meta">Trending: <span class="pill">Sweater lots</span> <span class="pill">Sock yarn</span> <span class="pill">Merino</span></div>
+      </div>
+      <div class="panel">
+        <strong>Quick stats</strong>
+        <ul class="meta" style="padding-left:18px; margin:8px 0 0;">
+          <li>2,184 active listings</li>
+          <li>Avg. bundle discount: 22%</li>
+          <li>Top brands: Malabrigo, Cascade, Knit Picks</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deals" class="section">
+      <h2>Featured deals</h2>
+      <div class="grid">
+        <article class="card">
+          <img src="https://picsum.photos/seed/yarn1/600/400" alt="Yarn lot" />
+          <div class="body">
+            <div class="badge">Bundle · 8 skeins</div>
+            <strong>Malabrigo Rios — Autumn Tones</strong>
+            <div class="meta">Worsted · 800g · like new</div>
+            <div class="price">$96 <span class="meta">($12/skein)</span></div>
+            <div class="seller"><span class="avatar"></span><span class="meta">by WillowWool</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://picsum.photos/seed/yarn2/600/400" alt="Yarn lot" />
+          <div class="body">
+            <div class="badge">Deal</div>
+            <strong>Berroco Vintage — Neutrals</strong>
+            <div class="meta">DK · 600g · lightly used</div>
+            <div class="price">$54 <span class="meta">($9/skein)</span></div>
+            <div class="seller"><span class="avatar"></span><span class="meta">by StashShed</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://picsum.photos/seed/yarn3/600/400" alt="Yarn lot" />
+          <div class="body">
+            <div class="badge">Rare colorway</div>
+            <strong>Hedgehog Fibres — Sock Yarn</strong>
+            <div class="meta">Fingering · 400g · new</div>
+            <div class="price">$82</div>
+            <div class="seller"><span class="avatar"></span><span class="meta">by DyedByJen</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://picsum.photos/seed/yarn4/600/400" alt="Yarn lot" />
+          <div class="body">
+            <div class="badge">Bulk lot</div>
+            <strong>Mixed Cotton Bundle</strong>
+            <div class="meta">Sport · 1.4kg · good</div>
+            <div class="price">$65</div>
+            <div class="seller"><span class="avatar"></span><span class="meta">by KnitKitKat</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="bundles" class="section two-col">
+      <div class="panel">
+        <h2>Bundle builder (mock)</h2>
+        <p class="meta">Sellers can scan or select yarn types to auto‑fill weight + estimate packaging.</p>
+        <table class="table">
+          <thead><tr><th>Yarn</th><th>Qty</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Cascade 220</td><td>6 skeins</td><td>600g</td></tr>
+            <tr><td>Knit Picks Stroll</td><td>4 skeins</td><td>400g</td></tr>
+            <tr><td>Generic Merino (custom)</td><td>3 skeins</td><td>300g</td></tr>
+          </tbody>
+        </table>
+        <div class="meta" style="margin-top:8px;">Estimated package: Medium box · 2.9 lb</div>
+      </div>
+      <div class="panel" id="shipping">
+        <h2>Shipping estimate (mock)</h2>
+        <p class="meta">Buyer sees total price + shipping before messaging.</p>
+        <ul class="meta" style="padding-left:18px;">
+          <li>USPS Ground Advantage: $7.85</li>
+          <li>USPS Priority: $10.40</li>
+          <li>UPS Ground: $9.20</li>
+        </ul>
+        <button class="btn" style="margin-top:8px;">Send Offer</button>
+      </div>
+    </section>
+
+    <section id="sell" class="section">
+      <h2>Seller workflow</h2>
+      <div class="grid">
+        <div class="panel">
+          <strong>1. Select yarn</strong>
+          <p class="meta">Typeahead pulls known yarns and auto‑fills weight + yardage.</p>
+        </div>
+        <div class="panel">
+          <strong>2. Price & bundle</strong>
+          <p class="meta">Quick lot pricing with suggested ranges and per‑skein view.</p>
+        </div>
+        <div class="panel">
+          <strong>3. Ship smarter</strong>
+          <p class="meta">Packing suggestions + estimated cost before listing.</p>
+        </div>
+        <div class="panel">
+          <strong>4. One inbox</strong>
+          <p class="meta">No more DMs scattered across platforms.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Demo only · Built for discussion · Not a live marketplace yet.
+    </footer>
   </div>
 </body>
 </html>
