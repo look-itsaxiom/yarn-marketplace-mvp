@@ -2,8 +2,17 @@
 
 Demo + backend scaffold for a yarn marketplace.
 
+## Demo
+- GitHub Pages mock: https://look-itsaxiom.github.io/yarn-marketplace-mvp/
+
+## Documentation
+- PRD: `docs/PRD.md`
+- Implementation plan: `docs/implementation-plan.md`
+- Data model: `docs/data-model.md`
+- API contract: `docs/api-contract.md`
+
 ## Frontend (demo)
-- GitHub Pages static mock: `/docs`
+- Static mock in `/docs`
 
 ## Backend (Supabase)
 - `backend/schema.sql` — initial schema
